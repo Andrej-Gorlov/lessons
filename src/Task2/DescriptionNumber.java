@@ -1,6 +1,8 @@
 package Task2;
 
 import Interface.Task;
+import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class DescriptionNumber implements Task {
@@ -48,10 +50,21 @@ public class DescriptionNumber implements Task {
 
     @Override
     public void runTask() {
-        System.out.println("Введите число: ");
-        this.num = _scn.nextInt();
-        definitionSign();
-        definitionParity();
-        System.out.printf("Число " + this.num + " является " + this.sing + " и " + this.parity);
+        try {
+            System.out.println("Введите число: ");
+            this.num = _scn.nextInt();
+            definitionSign();
+            definitionParity();
+            System.out.printf("Число " + this.num + " является " + this.sing + " и " + this.parity);
+        } catch (InputMismatchException e) {
+            System.out.println("Ошибка: Введите корректное целое число.");
+            _scn.next(); // Очистка неверного ввода
+        } catch (IllegalStateException e) {
+            System.out.println("Ошибка: Сканер находится в неверном состоянии.");
+        } catch (NoSuchElementException e) {
+            System.out.println("Ошибка: Нет доступного ввода.");
+        } catch (Exception e) {
+            System.out.println("Произошла ошибка: " + e.getMessage());
+        }
     }
 }

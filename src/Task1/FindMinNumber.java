@@ -1,6 +1,7 @@
 package Task1;
 
 import Interface.Task;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class FindMinNumber implements Task {
@@ -18,16 +19,27 @@ public class FindMinNumber implements Task {
 
     /// Запрос данных у пользователя
     private void display(){
-        System.out.println("Введите первое число: ");
-        this.num1 = _scn.nextDouble();
+        try {
+            System.out.println("Введите первое число: ");
+            this.num1 = _scn.nextDouble();
 
-        System.out.println("Введите второе число: ");
-        this.num2 = _scn.nextDouble();
+            System.out.println("Введите второе число: ");
+            this.num2 = _scn.nextDouble();
+        } catch (InputMismatchException e) {
+            System.out.println("Ошибка: Введите корректное число.");
+            _scn.next(); // Очистка неверного ввода
+        } catch (Exception e) {
+            System.out.println("Произошла ошибка: " + e.getMessage());
+        }
     }
 
     /// Поиск минимального числа
     private void searchMinNum(){
-        this.min = Math.min(this.num1, this.num2);
+        try {
+            this.min = Math.min(this.num1, this.num2);
+        } catch (Exception e) {
+            System.out.println("Произошла ошибка при вычислении минимума: " + e.getMessage());
+        }
     }
 
     @Override

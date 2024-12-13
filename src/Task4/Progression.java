@@ -1,6 +1,8 @@
 package Task4;
 
 import Interface.Task;
+import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Progression implements Task {
@@ -29,21 +31,43 @@ public class Progression implements Task {
 
     /// Арифметическоя прогрессия
     private void arithmetic(){
-        System.out.println("Введите шаг: ");
-        int step = _scn.nextInt();
-        System.out.println("Арифметическая прогрессия: ");
-        for (int i = 0; i < this.num; i++) {
-            System.out.println(this.startValue + i * step + " ");
+        try {
+            System.out.println("Введите шаг: ");
+            int step = _scn.nextInt();
+            System.out.println("Арифметическая прогрессия: ");
+            for (int i = 0; i < this.num; i++) {
+                System.out.println(this.startValue + i * step + " ");
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Ошибка: Введите корректное целое число для шага.");
+            _scn.next(); // Очистка неверного ввода
+        } catch (IllegalStateException e) {
+            System.out.println("Ошибка: Сканер находится в неверном состоянии.");
+        } catch (NoSuchElementException e) {
+            System.out.println("Ошибка: Нет доступного ввода.");
+        } catch (Exception e) {
+            System.out.println("Произошла ошибка: " + e.getMessage());
         }
     }
 
     /// Геометрической прогрессия
     private void  geometric(){
-        System.out.println("Введите множитель: ");
-        int multi = _scn.nextInt();
-        System.out.println("Геометрическая прогрессия: ");
-        for (int i = 0; i < this.num; i++) {
-            System.out.println(this.startValue  * Math.pow(multi,i) + " ");
+        try {
+            System.out.println("Введите множитель: ");
+            int multi = _scn.nextInt();
+            System.out.println("Геометрическая прогрессия: ");
+            for (int i = 0; i < this.num; i++) {
+                System.out.println(this.startValue  * Math.pow(multi,i) + " ");
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Ошибка: Введите корректное целое число для множителя.");
+            _scn.next(); // Очистка неверного ввода
+        } catch (IllegalStateException e) {
+            System.out.println("Ошибка: Сканер находится в неверном состоянии.");
+        } catch (NoSuchElementException e) {
+            System.out.println("Ошибка: Нет доступного ввода.");
+        } catch (Exception e) {
+            System.out.println("Произошла ошибка: " + e.getMessage());
         }
     }
 

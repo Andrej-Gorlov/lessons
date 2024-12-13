@@ -1,6 +1,7 @@
 package Task5;
 
 import Interface.Task;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class LeapYear implements Task {
@@ -13,13 +14,20 @@ public class LeapYear implements Task {
 
     @Override
     public void runTask() {
-        System.out.println("Введите год: ");
-        int year = _scn.nextInt();
+        try {
+            System.out.println("Введите год: ");
+            int year = _scn.nextInt();
 
-        if(isLeepYear(year)){
-            System.out.println(year + " является високосным годом.");
-        }else {
-            System.out.println(year +  "не является високосным годом.");
+            if(isLeepYear(year)){
+                System.out.println(year + " является високосным годом.");
+            }else {
+                System.out.println(year +  "не является високосным годом.");
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Ошибка: Введите корректное целое число для года.");
+            _scn.next(); // Очистка неверного ввода
+        } catch (Exception e) {
+            System.out.println("Произошла ошибка: " + e.getMessage());
         }
     }
 
